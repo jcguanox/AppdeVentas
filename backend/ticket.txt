@@ -1,21 +1,21 @@
-PEDIDO A COCINA
-============================
-NÚMERO DE ORDEN: 74
-============================
+        ORDEN DE PEDIDO
 
-PRODUCTO  CANTIDAD
-----------------------------
-Agua sin gas 0.5L   -----1
-Agua con gas 0.5L   -----1
-Fuze Tea 0.5L       -----1
-Fuze Tea 1.35L      -----1
+       POLLOS A LA BRASA
+           DEL VALLE
+        TELF: 0959224201
 
-============================
-TOTAL: $3.95
-============================
+       9/6/25, 2:20 p. m.
 
-PREPARAR LO ANTES POSIBLE
+        NÚMERO DE ORDEN:
+              #398
 
+CANT  PRODUCTO  P.UNIT
+-------------------------------
+3    Arroz              $1.00
+1    Gaseosa 3L         $3.25
 
+TOTAL: $6.25
+*Documento sin valor tributario*
+    GRACIAS POR PREFERIRNOS
 
 

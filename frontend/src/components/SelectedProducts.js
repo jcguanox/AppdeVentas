@@ -69,22 +69,24 @@ const SelectedProducts = ({ selectedProducts, onUpdateQuantity, onRemove, clearC
         }
     };
 
-    const imprimirTicketCocina = async (pedidoId) => {
-        try {
-            const response = await axios.post("api/print/imprimir-pedido", {
-                pedidoId,
-                productos: selectedProducts.map(({ product, quantity }) => ({
-                    nombre: product.nombre,
-                    cantidad: quantity,
-                })),
-                totalPrice,
-            });
+const imprimirTicketCocina = async (pedidoId) => {
+    try {
+        const response = await axios.post("api/print/imprimir-pedido", {
+            pedidoId,
+            productos: selectedProducts.map(({ product, quantity }) => ({
+                nombre: product.nombre,
+                cantidad: quantity,
+                precio: parseFloat(product.precio), // ✅ Asegúrate de que es un número
+            })),
+            totalPrice,
+        });
 
-            console.log(response.data);
-        } catch (error) {
-            console.error("Error al imprimir el ticket:", error);
-        }
-    };
+        console.log(response.data);
+    } catch (error) {
+        console.error("Error al imprimir el ticket:", error);
+    }
+};
+
 
     return (
         <div className="selected-products-container">

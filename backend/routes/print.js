@@ -4,41 +4,59 @@ const fs = require("fs");
 const { exec } = require("child_process");
 
 router.post("/imprimir-pedido", async (req, res) => {
-    const { pedidoId, productos, totalPrice } = req.body;
+    const { pedidoId, productos, totalPrice} = req.body;
     console.log("Generando ticket para impresión...");
 
-    // Ruta del archivo temporal
-    const filePath = `C:\\Users\\Jossue\\Documents\\GitHub\\tesisPuceTec\\backend\\ticket.txt`;
+    const filePath = `C:\\Users\\hp\\Documents\\GitHub\\tesisPuceTec\\backend\\ticket.txt`;
 
-    // Crear el contenido del ticket alineado a la izquierda
-    let contenido = `PEDIDO A COCINA\n`;
-    contenido += `============================\n`;
-    contenido += `NÚMERO DE ORDEN: ${pedidoId}\n`;
-    contenido += `============================\n\n`;
-
-    contenido += `PRODUCTO  CANTIDAD\n`;
-    contenido += `----------------------------\n`;
-
-    productos.forEach(({ nombre, cantidad }) => {
-        // Asegurar que el nombre del producto se ajuste sin desplazarse
-        let nombreFormateado = nombre.padEnd(20, " ").substring(0, 20);
-        let cantidadFormateada = String(cantidad).padStart(1, " "); // Asegurar que la cantidad esté alineada
-        contenido += `${nombreFormateado}-----${cantidadFormateada}\n`;
+    const now = new Date();
+    const fechaHora = now.toLocaleString("es-EC", {
+        dateStyle: "short",
+        timeStyle: "short",
     });
 
-    contenido += `\n============================\n`;
-    contenido += `TOTAL: $${totalPrice.toFixed(2)}\n`;
-    contenido += `============================\n\n`;
-    contenido += `PREPARAR LO ANTES POSIBLE\n\n`;
-    contenido += `\n\n\n`; // Espacios extra para corte de papel
+    const ancho = 32;
 
-    // Escribir en el archivo
+    const centrar = (texto) => {
+        const espacio = Math.max(0, Math.floor((ancho - texto.length) / 2));
+        return " ".repeat(espacio) + texto;
+    };
+
+    let contenido = "";
+    contenido += `${centrar("ORDEN DE PEDIDO")}\n\n`;
+    contenido += `${centrar("POLLOS A LA BRASA")}\n`;
+    contenido += `${centrar("DEL VALLE")}\n`;
+    contenido += `${centrar("TELF: 0959224201")}\n\n`;
+    contenido += `${centrar(fechaHora)}\n\n`;
+
+    contenido += `${centrar("NÚMERO DE ORDEN:")}\n`;
+    contenido += `${centrar(`#${pedidoId}`)}\n\n`;
+
+    contenido += `CANT  PRODUCTO  P.UNIT\n`;
+contenido += `-------------------------------\n`;
+
+productos.forEach(({ nombre, cantidad, precio }) => {
+    const cantidadFormateada = String(cantidad ?? "").padEnd(4, " ");
+    const nombreFormateado = (nombre ?? "").padEnd(18, " ").substring(0, 18);
+    const precioNumero = parseFloat(precio);
+    const precioFormateado = isNaN(precioNumero)
+        ? "$0.00"
+        : `$${precioNumero.toFixed(2)}`.padStart(6, " ");
+    
+    contenido += `${cantidadFormateada} ${nombreFormateado}${precioFormateado}\n`;
+});
+
+
+
+
+    contenido += `\nTOTAL: $${totalPrice.toFixed(2)}\n`;
+    contenido += `*Documento sin valor tributario*\n`;
+    contenido += `${centrar("GRACIAS POR PREFERIRNOS")}\n\n\n`;
+
     fs.writeFileSync(filePath, contenido, "utf-8");
 
-    // Comando para imprimir con Notepad
     const printCommand = `notepad /p "${filePath}"`;
 
-    // Ejecutar el comando de impresión
     exec(printCommand, (error, stdout, stderr) => {
         if (error) {
             console.error("Error al imprimir:", error);
