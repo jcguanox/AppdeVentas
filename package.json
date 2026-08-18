@@ -2,23 +2,18 @@
   "name": "prueba-6",
   "author": "Tu Nombre o Empresa",
   "version": "1.0.0",
-  "description": "Aplicación con React (frontend), Express (backend) y Electron",
-  "main": "main.js",
-  "type": "module",
-  "dependencies": {
-    "node-fetch": "^3.3.2",
-    "react-router-dom": "^6.27.0"
+  "private": true,
+  "scripts": {
+    "backend": "cd backend && npm start",
+    "frontend": "cd frontend && npm start",
+    "electron": "electron .",
+    "dev": "concurrently \"npm run backend\" \"npm run frontend\" \"npm run electron\"",
+    "start": "electron .",
+    "build": "electron-builder",
+    "dist": "electron-builder"
   },
   "devDependencies": {
-    "electron": "^34.0.1",
-    "electron-builder": "^24.13.3"
-  },
-  "scripts": {
-    "build": "electron-builder",
-    "start": "electron .",
-    "dev": "cd backend && npm run dev",
-    "frontend": "cd frontend && npm start",
-    "dist": "electron-builder"
+    "concurrently": "^10.0.4"
   },
   "build": {
     "appId": "com.tuapp.nombre",

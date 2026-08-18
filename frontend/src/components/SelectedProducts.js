@@ -18,56 +18,57 @@ const SelectedProducts = ({ selectedProducts, onUpdateQuantity, onRemove, clearC
         onUpdateQuantity(id, newQuantity);
     };
 
-    const handleAcceptPurchase = async () => {
-        if (selectedProducts.length === 0) {
-            Swal.fire({
-                icon: "error",
-                title: "Error",
-                text: "No tienes productos seleccionados para enviar a cocina.",
-            });
-            return;
-        }
+const handleAcceptPurchase = async () => {
+    if (selectedProducts.length === 0) {
+        Swal.fire({
+            icon: "error",
+            title: "Error",
+            text: "No tienes productos seleccionados para enviar a cocina.",
+        });
+        return;
+    }
 
-        try {
-            const userId = localStorage.getItem("fullname");
+    try {
+        const userId = parseInt(localStorage.getItem("userId"), 10);
 
-            const pedidoData = {
-                userId: userId,
-                totalPrice: parseFloat(totalPrice),
-                productos: selectedProducts.map(({ product, quantity }) => ({
-                    productId: product.id,
-                    quantity: quantity,
-                    price: product.precio,
-                })),
-            };
+        const pedidoData = {
+            userId: userId,
+            totalPrice: parseFloat(totalPrice),
+            productos: selectedProducts.map(({ product, quantity }) => ({
+                productId: product.id,
+                quantity: quantity,
+                price: product.precio,
+            })),
+        };
 
-            const response = await axios.post("/api/pedido", pedidoData);
+        const response = await axios.post("/api/pedido", pedidoData);
 
-            Swal.fire({
-                icon: "success",
-                title: "Pedido enviado a cocina",
-                text: `Número de Pedido: ${response.data.pedidoId}`,
-                confirmButtonText: "Aceptar",
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    imprimirTicketCocina(response.data.pedidoId);
-                    if (typeof clearCart === "function") {
-                        clearCart();
-                    } else {
-                        console.warn("clearCart no está definida o no es una función.");
-                    }
+        Swal.fire({
+            icon: "success",
+            title: "Pedido enviado a cocina",
+            text: `Número de Pedido: ${response.data.pedidoId}`,
+            confirmButtonText: "Aceptar",
+        }).then((result) => {
+            if (result.isConfirmed) {
+                imprimirTicketCocina(response.data.pedidoId);
+
+                if (typeof clearCart === "function") {
+                    clearCart();
+                } else {
+                    console.warn("clearCart no está definida o no es una función.");
                 }
-            });
-        } catch (error) {
-            console.error("Error al enviar el pedido:", error);
+            }
+        });
+    } catch (error) {
+        console.error("Error al enviar el pedido:", error);
 
-            Swal.fire({
-                icon: "error",
-                title: "Error",
-                text: "Hubo un problema al enviar el pedido. Intenta de nuevo.",
-            });
-        }
-    };
+        Swal.fire({
+            icon: "error",
+            title: "Error",
+            text: "Hubo un problema al enviar el pedido. Intenta de nuevo.",
+        });
+    }
+};
 
 const imprimirTicketCocina = async (pedidoId) => {
     try {

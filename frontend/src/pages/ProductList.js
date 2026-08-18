@@ -104,27 +104,30 @@ const ProductList = () => {
             <div className="col-md-10">
                 <div className="section-buttons">
                     <button onClick={() => setCurrentSection('menu')} className={`section-btn ${currentSection === 'menu' ? 'active' : ''}`}>
-                        Menú
+                        Snacks
                     </button>
                     <button onClick={() => setCurrentSection('bebidas')} className={`section-btn ${currentSection === 'bebidas' ? 'active' : ''}`}>
                         Bebidas
+                    </button>
+                    <button onClick={() => setCurrentSection('limpieza')} className={`section-btn ${currentSection === 'limpieza' ? 'active' : ''}`}>
+                        Limpieza
                     </button>
                 </div>
                 {/* Categorias */}
                 <div className="category-container">
                     {currentSection === 'menu' && (
                         <>
-                            <Category title="Combos Personales" products={filteredProducts('Combos personales')} onAdd={handleAddProduct} />
-                            <Category title="Promoción" products={filteredProducts('Promoción')} onAdd={handleAddProduct} />
-                            <Category title="Porciones" products={filteredProducts('Porciones')} onAdd={handleAddProduct} />
+                            <Category title="Viveres Snacks" products={filteredProducts('Viveres Snacks')} onAdd={handleAddProduct} />
                         </>
                     )}
                     {currentSection === 'bebidas' && (
                         <>
-                            <Category title="Gaseosas" products={filteredProducts('Gaseosa')} onAdd={handleAddProduct} />
-                            <Category title="Tea" products={filteredProducts('Tea')} onAdd={handleAddProduct} />
-                            <Category title="Jugos" products={filteredProducts('Jugo')} onAdd={handleAddProduct} />
-                            <Category title="Agua" products={filteredProducts('Agua')} onAdd={handleAddProduct} />
+                            <Category title="Viveres Bebidas" products={filteredProducts('Viveres Bebidas')} onAdd={handleAddProduct} />
+                        </>
+                    )}
+                    {currentSection === 'limpieza' && (
+                        <>
+                            <Category title="Viveres Limpieza" products={filteredProducts('Viveres Limpieza')} onAdd={handleAddProduct} />
                         </>
                     )}
                 </div>

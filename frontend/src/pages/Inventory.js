@@ -108,6 +108,7 @@ const Inventory = () => {
     const categoryMap = {
         1: "Menú",
         2: "Bebidas",
+        3: "Limpieza",
     };
 
     const formatDate = (dateString) => {
@@ -379,13 +380,9 @@ const Inventory = () => {
         }
     };
     const descripciones = [
-        "Agua",
-        "Gaseosa",
-        "Té",
-        "Jugo",
-        "Combos personales",
-        "Promoción",
-        "Porciones",
+        "Viveres Snacks",
+        "Viveres Bebidas",
+        "Viveres Limpieza"
     ];
     const handleDelete = (userId) => {
         const product = products.find(p => p.id === userId);
@@ -561,8 +558,9 @@ const Inventory = () => {
                                                 onChange={handleFilterChange}
                                             >
                                                 <option value="">Sección</option>
-                                                <option value="1">Menú</option>
+                                                <option value="1">Snacks</option>
                                                 <option value="2">Bebidas</option>
+                                                <option value="3">Limpieza</option>
                                             </Form.Select>
                                         </Col>
                                         <Col>
@@ -572,13 +570,7 @@ const Inventory = () => {
                                                 onChange={handleFilterChange}
                                             >
                                                 <option value="">Categoria</option>
-                                                <option value="Agua">Agua</option>
-                                                <option value="Gaseosa">Gaseosa</option>
-                                                <option value="Tea">Tea</option>
-                                                <option value="Jugo">Jugo</option>
-                                                <option value="Combos personales">Combos Personales</option>
-                                                <option value="Promoción">Promoción</option>
-                                                <option value="Porciones">Porciones</option>
+                                                <option value="Viveres Bebidas">Viveres Bebidas</option>
                                             </Form.Select>
                                         </Col>
                                     </Row>
@@ -691,8 +683,9 @@ const Inventory = () => {
                                                 required
                                             >
                                                 <option value="">Seleccione sección</option>
-                                                <option value="1">Menú</option>
+                                                <option value="1">Snacks</option>
                                                 <option value="2">Bebidas</option>
+                                                <option value="3">Limpieza</option>
                                             </Form.Select>
                                         </Form.Group>
 
