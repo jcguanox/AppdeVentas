@@ -1,3 +1,6 @@
+/* ==========================================================================
+   1. RESETEO GLOBAL Y LAYOUT PRINCIPAL DE PERSONAL (STAFF)
+   ========================================================================== */
 html,
 body {
     margin: 0;
@@ -5,6 +8,10 @@ body {
     width: 100%;
     height: 100%;
     box-sizing: border-box;
+    overflow-x: hidden;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #E4ECF1 0%, #D1DDE6 100%);
+    color: #333333;
 }
 
 .staff-page {
@@ -15,30 +22,77 @@ body {
     padding: 0;
 }
 
+/* ==========================================================================
+   2. SIDEBAR COLAPSABLE (HOVER)
+   ========================================================================== */
 .sidebar {
-    width: 240px;
+    width: 250px;
     height: 100vh;
+    background: linear-gradient(135deg, #1e3a5f, #1b6ca8);
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 1000;
+    flex-shrink: 0;
     overflow-y: auto;
-    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
-    z-index: 10;
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.2);
+    
+    /* Se oculta dejando 10px visibles para activar con el cursor */
+    transform: translateX(-240px);
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
+.sidebar:hover {
+    transform: translateX(0);
+}
+
+/* ==========================================================================
+   3. CONTENEDOR PRINCIPAL Y ELEMENTOS
+   ========================================================================== */
 .staff-container {
     flex-grow: 1;
     display: flex;
     flex-direction: column;
-    padding: 20px;
+    width: 100%;
+    height: 100%;
+    padding: 20px 20px 20px 35px; /* Padding izquierdo para interactuar con la solapa */
+    box-sizing: border-box;
     overflow-y: auto;
     position: relative;
     z-index: 1;
+    transition: all 0.3s ease;
 }
 
+.header {
+    width: 100%;
+    margin-bottom: 20px;
+}
 
-
-.header>* {
+.header > * {
     width: 100%;
 }
 
 .staff-title h1 {
     margin: 0;
+    color: #1e3a5f;
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+/* ==========================================================================
+   4. ADAPTATIVIDAD RESPONSIVA (PANTALLAS PEQUEÑAS)
+   ========================================================================== */
+@media (max-width: 768px) {
+    .sidebar {
+        width: 200px;
+        transform: translateX(-190px);
+    }
+
+    .staff-container {
+        padding: 15px 15px 15px 25px;
+    }
+
+    .staff-title h1 {
+        font-size: 1.5rem;
+    }
 }

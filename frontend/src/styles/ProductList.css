@@ -1,33 +1,42 @@
-/* Fondo con degradado */
+/* ==========================================================================
+   1. RESETEO GLOBAL Y ESTRUCTURA BASE
+   ========================================================================== */
+html,
 body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    overflow-x: hidden;
     background: linear-gradient(135deg, #E4ECF1 0%, #D1DDE6 100%);
     color: #333333;
     font-family: Arial, sans-serif;
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 15px;
 }
 
-/* Contenedor del menú */
+/* ==========================================================================
+   2. CONTENEDOR PRINCIPAL
+   ========================================================================== */
 .menu-container {
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 15px;
+    padding: 15px 320px 15px 25px; /* Espacio para el carrito fijo */
     width: 100%;
+    box-sizing: border-box;
+    transition: all 0.3s ease;
 }
 
-/* Botones de sección */
+/* Botones de Sección (Menú superior) */
 .section-buttons {
     display: flex;
     flex-direction: row;
     justify-content: center;
     gap: 15px;
-    margin-top: 20px;
-    margin-left: 10px;
-    margin-right: 10px;
-    margin-bottom: 20px;
+    margin: 20px 10px;
 }
 
 .section-btn {
@@ -46,28 +55,31 @@ body {
     background-color: #1B6CA8;
 }
 
-/* Contenedor de categorías */
+/* ==========================================================================
+   3. CATEGORÍAS Y TARJETAS
+   ========================================================================== */
 .category-container {
     margin-top: 15px;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
+    align-items: flex-start;
     width: 100%;
     max-width: 1200px;
     gap: 25px;
     flex-wrap: wrap;
 }
 
-/* Tarjetas de categoría */
 .category {
-    flex: 1 1 45%;
-    max-width: 45%;
+    flex: 1 1 320px;
+    max-width: 500px;
     display: flex;
     flex-direction: column;
     align-items: center;
     padding: 16px;
     background-color: #FFFFFF;
-    border-radius: 6px;
+    border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    box-sizing: border-box;
 }
 
 .category h3 {
@@ -80,24 +92,27 @@ body {
     width: 100%;
 }
 
-/* Lista de productos */
+/* ==========================================================================
+   4. LISTA Y TARJETAS EN EL MENÚ PRINCIPAL
+   ========================================================================== */
 .product-list {
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;
     gap: 12px;
     width: 100%;
 }
 
-/* Tarjeta de producto */
 .product-item {
-    flex: 1 1 48%;
+    flex: 1 1 220px;
+    max-width: 100%;
     padding: 12px;
     border-radius: 8px;
     background-color: #efefef;
     color: #333333;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     text-align: left;
-    margin-bottom: 12px;
+    box-sizing: border-box;
 }
 
 .product-info {
@@ -118,14 +133,15 @@ body {
     font-weight: bold;
     color: #1B6CA8;
     margin-top: 6px;
-    float: right;
 }
 
 /* Controles de cantidad */
 .quantity-control {
     display: flex;
     align-items: center;
-    justify-content: flex-end;
+    justify-content: flex-start;
+    gap: 6px;
+    margin-top: 8px;
 }
 
 .quantity-btn {
@@ -148,26 +164,15 @@ body {
     font-weight: bold;
     color: #333333;
     text-align: center;
-    min-width: 25px;
+    min-width: 20px;
 }
 
-.quantity-input {
-    width: 50px;
-    padding: 6px;
-    font-size: 14px;
-    margin-right: 10px;
-    border: 1px solid #CCCCCC;
-    border-radius: 4px;
-    text-align: center;
-}
-
-/* Botón de eliminar producto */
 .remove-btn {
     background-color: #FF6B35;
     color: #FFFFFF;
     border: none;
     padding: 6px 10px;
-    margin-left: 6px;
+    margin-left: auto;
     border-radius: 4px;
     cursor: pointer;
     font-size: 14px;
@@ -177,7 +182,9 @@ body {
     background-color: #CC562B;
 }
 
-/* Contenedor de productos seleccionados */
+/* ==========================================================================
+   5. PANEL DE PRODUCTOS SELECCIONADOS (AJUSTADO VERTICAL)
+   ========================================================================== */
 .selected-products-container {
     position: fixed;
     right: 15px;
@@ -187,17 +194,44 @@ body {
     color: #333333;
     padding: 20px;
     border-radius: 8px;
-    width: 300px;
+    width: 280px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     display: flex;
     flex-direction: column;
+    z-index: 900;
+    box-sizing: border-box;
 }
 
-/* Lista de productos seleccionados */
+.selected-products-container h2 {
+    font-size: 20px;
+    margin-top: 0;
+    margin-bottom: 15px;
+    color: #1E3A5F;
+}
+
+/* Mantiene los items apilados hacia abajo (vertical) sin barra horizontal */
 .selected-products-container .product-list {
     flex: 1;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    gap: 12px;
     overflow-y: auto;
-    margin-bottom: 10px;
+    overflow-x: hidden;
+    padding-right: 5px;
+}
+
+/* Sobreescribe flex: 1 1 220px para no expandir la tarjeta hacia abajo */
+.selected-products-container .product-item {
+    flex: 0 0 auto;
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    box-sizing: border-box;
+    background-color: #f4f4f4;
+    padding: 10px;
+    border-radius: 6px;
 }
 
 .selected-products-container .total-price {
@@ -218,33 +252,26 @@ body {
     cursor: pointer;
     font-size: 16px;
     margin-top: 10px;
-
 }
 
 .selected-products-container .accept-btn:hover {
     background-color: #1B6CA8;
 }
 
-.product-btn {
-    padding: 8px 12px;
-    font-size: 14px;
-    border: none;
-    background-color: #1E3A5F;
-    color: #FFFFFF;
-    cursor: pointer;
-    border-radius: 5px;
-    transition: background-color 0.3s ease;
-}
+/* ==========================================================================
+   6. RESPONSIVE DESIGN
+   ========================================================================== */
+@media (max-width: 768px) {
+    .menu-container {
+        padding-right: 15px;
+    }
 
-.product-btn:hover {
-    background-color: #1B6CA8;
-}
-
-/* Columnas */
-.col-md-10 {
-    flex: 1 1 90%;
-}
-
-.col-md-2 {
-    flex: 1 1 10%;
+    .selected-products-container {
+        position: relative;
+        width: 100%;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        margin-top: 20px;
+    }
 }

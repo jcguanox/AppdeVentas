@@ -1,60 +1,96 @@
-/* Contenedor general */
-.orders-container {
+/* ==========================================================================
+   CORRECCIÓN DEFINITIVA: PRODUCTOS SELECCIONADOS VERTICALES
+   ========================================================================== */
+
+/* 1. Forzar el contenedor del carrito */
+.selected-products-container {
+    position: fixed;
+    right: 15px;
+    top: 15px;
+    bottom: 15px;
+    background-color: #FFFFFF;
+    color: #333333;
     padding: 20px;
-    font-family: Arial, sans-serif;
+    border-radius: 8px;
+    width: 300px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    display: flex !important;
+    flex-direction: column !important;
+    box-sizing: border-box;
+    z-index: 900;
 }
 
-/* Título */
-.orders-title {
-    font-size: 24px;
-    color: #333;
-    margin-bottom: 20px;
-    text-align: center;
+/* 2. Forzar la lista de productos a ir hacia abajo (Vertical) */
+.selected-products-container div:has(> .product-item),
+.selected-products-container .product-list,
+.selected-products-container ul {
+    display: flex !important;
+    flex-direction: column !important; /* Mantiene apilado vertical */
+    flex-wrap: nowrap !important;
+    justify-content: flex-start !important;
+    align-items: stretch !important;
+    width: 100% !important;
+    height: auto !important;
+    max-height: calc(100vh - 180px) !important; /* Limita alto para permitir scroll */
+    overflow-y: auto !important; /* Scroll vertical */
+    overflow-x: hidden !important; /* Elimina la barra horizontal inferior */
+    gap: 10px !important;
+    margin: 10px 0 !important;
+    padding: 0 !important;
 }
 
-/* Mensajes de estado */
-.orders-loading {
-    font-size: 16px;
-    color: #666;
-    text-align: center;
+/* 3. Ajustar las tarjetas de producto para que NO se estiren verticalmente */
+.selected-products-container .product-item {
+    display: flex !important;
+    flex-direction: column !important;
+    width: 100% !important;
+    min-width: 100% !important;
+    max-width: 100% !important;
+    height: auto !important; /* Anula el estiramiento vertical enorme */
+    min-height: unset !important;
+    flex: 0 0 auto !important; /* Evita expansión o colapso anormal */
+    box-sizing: border-box !important;
+    background-color: #f4f4f4 !important;
+    padding: 10px 12px !important;
+    border-radius: 8px !important;
+    margin: 0 !important;
 }
 
-.orders-error {
-    font-size: 16px;
-    color: red;
-    text-align: center;
-}
-
-.orders-empty {
-    font-size: 16px;
-    color: #999;
-    text-align: center;
-}
-
-/* Tabla */
-.orders-table {
+/* 4. Alineación interna del producto (Nombre, Precio y Controles) */
+.selected-products-container .product-info {
+    display: flex;
+    flex-direction: column;
     width: 100%;
-    border-collapse: collapse;
-    margin-top: 20px;
 }
 
-.orders-table th,
-.orders-table td {
-    border: 1px solid #ccc;
-    padding: 10px;
-    text-align: left;
+.selected-products-container .quantity-control {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 5px;
+    margin-top: 8px;
+    width: 100%;
 }
 
-.orders-table th {
-    background-color: #f8f8f8;
+/* 5. Pie del carrito (Total y Botón) */
+.selected-products-container .total-price {
+    font-size: 20px;
     font-weight: bold;
-    color: #333;
+    text-align: center;
+    margin-top: auto !important;
+    padding-top: 10px;
+    color: #1B6CA8;
 }
 
-.orders-table tr:nth-child(even) {
-    background-color: #f9f9f9;
-}
-
-.orders-table tr:hover {
-    background-color: #f1f1f1;
+.selected-products-container .accept-btn {
+    width: 100%;
+    padding: 12px;
+    background-color: #1E3A5F;
+    color: #FFFFFF;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    margin-top: 10px;
 }

@@ -1,22 +1,46 @@
-/* Contenedor principal del menú */
+/* ==========================================================================
+   SIDE MENU COLAPSABLE (HOVER CORREGIDO)
+   ========================================================================== */
 .side-menu {
     width: 250px;
     height: 100vh;
     background: linear-gradient(135deg, #1e3a5f, #1b6ca8);
-    /* Fondo degradado */
     display: flex;
     flex-direction: column;
     align-items: center;
     padding: 20px;
     box-shadow: 2px 0 10px rgba(0, 0, 0, 0.2);
-    /* Sombra más pronunciada */
     position: fixed;
     left: 0;
     top: 0;
     z-index: 1000;
-    /* Asegura que esté por encima de otros elementos */
+    box-sizing: border-box;
+
+    /* Oculta dejando exactamente 10px visibles para la interacción */
+    transform: translateX(-240px);
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
+/* Oculta los elementos internos cuando el menú está replegado para evitar el efecto de doble recuadro */
+.side-menu > * {
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.2s ease, visibility 0.2s ease;
+}
+
+/* Al hacer Hover muestra el menú y activa sus hijos */
+.side-menu:hover {
+    transform: translateX(0);
+}
+
+.side-menu:hover > * {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* ==========================================================================
+   ELEMENTOS INTERNOS
+   ========================================================================== */
 /* Logo */
 .logo-container {
     margin-bottom: 40px;
@@ -24,29 +48,24 @@
     justify-content: center;
     align-items: center;
     background-color: rgba(255, 255, 255, 0.1);
-    /* Fondo semi-transparente */
     border-radius: 12px;
-    /* Bordes redondeados */
     padding: 15px;
-    /* Espaciado interno */
     width: 100%;
-    /* Ocupa todo el ancho disponible */
+    box-sizing: border-box;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    /* Sombra para el logo */
 }
 
 .logo-image {
-    width: 180px;
+    width: 100%;
+    max-width: 180px;
     height: auto;
     object-fit: contain;
     cursor: pointer;
     transition: transform 0.3s ease;
-    /* Efecto de escala al hacer hover */
 }
 
 .logo-image:hover {
     transform: scale(1.05);
-    /* Efecto de escala al hacer hover */
 }
 
 /* Opciones del menú */
@@ -54,47 +73,38 @@
     display: flex;
     flex-direction: column;
     gap: 15px;
-    /* Espacio entre elementos */
     width: 100%;
     flex: 1;
-    /* Ocupa el espacio disponible */
 }
 
 .menu-item {
     display: flex;
     align-items: center;
     gap: 15px;
-    /* Espacio entre ícono y texto */
     padding: 12px 15px;
     text-decoration: none;
     color: #FFFFFF;
     font-size: 16px;
     border-radius: 8px;
     transition: background-color 0.3s ease, transform 0.3s ease;
-    /* Transición suave */
     background-color: rgba(255, 255, 255, 0.1);
-    /* Fondo semi-transparente */
+    box-sizing: border-box;
 }
 
 .menu-item:hover {
     background-color: rgba(255, 255, 255, 0.2);
-    /* Cambio de fondo al hacer hover */
     transform: translateX(5px);
-    /* Efecto de desplazamiento al hacer hover */
 }
 
 /* Iconos */
 .menu-item i {
     font-size: 24px;
-    /* Tamaño de los íconos */
     color: #FF6B35;
     transition: color 0.3s ease;
-    /* Transición de color al hacer hover */
 }
 
 .menu-item:hover i {
     color: #FFFFFF;
-    /* Cambio de color al hacer hover */
 }
 
 /* Footer del SideMenu */
@@ -102,13 +112,12 @@
     width: 100%;
     padding: 15px;
     background-color: rgba(255, 255, 255, 0.1);
-    /* Fondo semi-transparente */
     border-radius: 8px;
     display: flex;
     flex-direction: column;
     gap: 10px;
     margin-top: auto;
-    /* Lo coloca en la parte inferior */
+    box-sizing: border-box;
 }
 
 .user-info {
@@ -127,28 +136,30 @@
 .logout-button {
     display: flex;
     align-items: center;
+    justify-content: center;
     gap: 10px;
     padding: 10px;
     background-color: rgba(255, 107, 53, 0.8);
-    /* Color naranja semi-transparente */
     color: #FFFFFF;
     border: none;
     border-radius: 8px;
     cursor: pointer;
     font-size: 14px;
     transition: background-color 0.3s ease;
+    width: 100%;
 }
 
 .logout-button:hover {
     background-color: rgba(255, 107, 53, 1);
-    /* Color naranja sólido al hacer hover */
 }
 
-/* Responsive Design */
+/* ==========================================================================
+   RESPONSIVE DESIGN (PANTALLAS PEQUEÑAS)
+   ========================================================================== */
 @media (max-width: 768px) {
     .side-menu {
         width: 200px;
-        /* Menor ancho en pantallas pequeñas */
+        transform: translateX(-190px); /* Ajustado proporcionalmente para dejar 10px */
         padding: 15px;
     }
 
@@ -157,20 +168,13 @@
         padding: 10px;
     }
 
-    .logo-image {
-        width: 140px;
-        /* Logo más pequeño en móviles */
-    }
-
     .menu-item {
         padding: 10px 12px;
         font-size: 14px;
-        /* Texto más pequeño en móviles */
     }
 
     .menu-item i {
         font-size: 20px;
-        /* Íconos más pequeños en móviles */
     }
 
     .side-menu-footer {
