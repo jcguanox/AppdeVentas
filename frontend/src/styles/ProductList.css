@@ -21,7 +21,8 @@ body {
 /* Botones de sección */
 .section-buttons {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    justify-content: center;
     gap: 15px;
     margin-top: 20px;
     margin-left: 10px;

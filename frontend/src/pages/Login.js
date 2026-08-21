@@ -10,7 +10,7 @@ const Login = () => {
     const [cedula, setCedula] = useState('');
     const [password, setPassword] = useState('');
     const [loading, setLoading] = useState(false);
-    const [showPassword, setShowPassword] = useState(false);
+    const [showPassword, setShowPassword] = useState(false);                                                        
     const navigate = useNavigate();
 
     const handleSubmit = async (event) => {

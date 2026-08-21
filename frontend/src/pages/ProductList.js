@@ -112,22 +112,30 @@ const ProductList = () => {
                     <button onClick={() => setCurrentSection('limpieza')} className={`section-btn ${currentSection === 'limpieza' ? 'active' : ''}`}>
                         Limpieza
                     </button>
+                    <button onClick={() => setCurrentSection('viveres')} className={`section-btn ${currentSection === 'viveres' ? 'active' : ''}`}>
+                        Viveres
+                    </button>
                 </div>
                 {/* Categorias */}
                 <div className="category-container">
                     {currentSection === 'menu' && (
                         <>
-                            <Category title="Viveres Snacks" products={filteredProducts('Viveres Snacks')} onAdd={handleAddProduct} />
+                            <Category title="Snacks" products={filteredProducts('Snacks')} onAdd={handleAddProduct} />
                         </>
                     )}
                     {currentSection === 'bebidas' && (
                         <>
-                            <Category title="Viveres Bebidas" products={filteredProducts('Viveres Bebidas')} onAdd={handleAddProduct} />
+                            <Category title="Bebidas" products={filteredProducts('Bebidas')} onAdd={handleAddProduct} />
                         </>
                     )}
                     {currentSection === 'limpieza' && (
                         <>
-                            <Category title="Viveres Limpieza" products={filteredProducts('Viveres Limpieza')} onAdd={handleAddProduct} />
+                            <Category title="Limpieza" products={filteredProducts('Limpieza')} onAdd={handleAddProduct} />
+                        </>
+                    )}
+                    {currentSection === 'viveres' && (
+                        <>
+                            <Category title="Viveres" products={filteredProducts('Viveres')} onAdd={handleAddProduct} />
                         </>
                     )}
                 </div>

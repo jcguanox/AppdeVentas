@@ -45,7 +45,7 @@ const handleAcceptPurchase = async () => {
 
         Swal.fire({
             icon: "success",
-            title: "Pedido enviado a cocina",
+            title: "Venta Exitosa",
             text: `Número de Pedido: ${response.data.pedidoId}`,
             confirmButtonText: "Aceptar",
         }).then((result) => {
@@ -133,7 +133,7 @@ const imprimirTicketCocina = async (pedidoId) => {
             </div>
 
             <button onClick={handleAcceptPurchase} className="accept-btn">
-                Enviar Pedido a Cocina
+                Enviar venta
             </button>
         </div>
     );

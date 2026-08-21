@@ -109,6 +109,7 @@ const Inventory = () => {
         1: "Menú",
         2: "Bebidas",
         3: "Limpieza",
+        4: "Viveres"
     };
 
     const formatDate = (dateString) => {
@@ -380,9 +381,11 @@ const Inventory = () => {
         }
     };
     const descripciones = [
-        "Viveres Snacks",
-        "Viveres Bebidas",
-        "Viveres Limpieza"
+        "Snacks",
+        "Bebidas",
+        "Limpieza",
+        "Viveres"
+
     ];
     const handleDelete = (userId) => {
         const product = products.find(p => p.id === userId);
@@ -561,6 +564,7 @@ const Inventory = () => {
                                                 <option value="1">Snacks</option>
                                                 <option value="2">Bebidas</option>
                                                 <option value="3">Limpieza</option>
+                                                <option value="4">Viveres</option>
                                             </Form.Select>
                                         </Col>
                                         <Col>
@@ -686,6 +690,7 @@ const Inventory = () => {
                                                 <option value="1">Snacks</option>
                                                 <option value="2">Bebidas</option>
                                                 <option value="3">Limpieza</option>
+                                                <option value="4">Viveres</option>
                                             </Form.Select>
                                         </Form.Group>
 

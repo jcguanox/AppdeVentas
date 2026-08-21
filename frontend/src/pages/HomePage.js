@@ -21,7 +21,7 @@ const HomePage = () => {
 
     return (
         <div className="homepage-container">
-            <h1 className="homepage-title">Pollos a la Brasa Del Valle</h1>
+            <h1 className="homepage-title">MiniMarket Mayte</h1>
             <div className="section-links">
 
                 <Link to="/products" className="section-card">
